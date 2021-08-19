@@ -4,6 +4,8 @@
 #include "Gizmos.h"
 #include <glm/ext.hpp>
 
+#include "Sphere.h"
+
 bool PhysicsGame::startup()
 {
 	aie::Gizmos::create(255U, 255U, 65535U, 65535U);
@@ -14,6 +16,9 @@ bool PhysicsGame::startup()
 	setBackgroundColour(0.1f, 0.1f, 0.1f);
 
 	m_scene = new PhysicsScene();
+	m_scene->setGravity({ 0, 0 });
+	Sphere* sphere = new Sphere(glm::vec2(), glm::vec2(), 1, 10, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+	m_scene->addActor(sphere);
 
 	return true;
 }
