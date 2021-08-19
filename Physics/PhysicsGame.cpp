@@ -17,8 +17,14 @@ bool PhysicsGame::startup()
 
 	m_scene = new PhysicsScene();
 	m_scene->setGravity({ 0, 0 });
-	Sphere* sphere = new Sphere(glm::vec2(), glm::vec2(), 1, 10, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+
+	Sphere* sphere = new Sphere(glm::vec2(20, 0), glm::vec2(), 1, 10, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 	m_scene->addActor(sphere);
+
+	Sphere* sphere1 = new Sphere(glm::vec2(-20, 0), glm::vec2(), 1, 10, glm::vec4(0.0f, 1.0f, 1.0f, 1.0f));
+	m_scene->addActor(sphere1);
+
+	sphere1->applyForce({ 5, 0 });
 
 	return true;
 }
