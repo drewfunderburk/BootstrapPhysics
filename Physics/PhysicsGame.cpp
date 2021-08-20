@@ -5,6 +5,7 @@
 #include <glm/ext.hpp>
 
 #include "Sphere.h"
+#include "Plane.h"
 
 bool PhysicsGame::startup()
 {
@@ -25,6 +26,9 @@ bool PhysicsGame::startup()
 	m_scene->addActor(sphere1);
 
 	sphere1->applyForce({ 5, 0 });
+
+	Plane* surface = new Plane(glm::vec2(0.1f, 1.0f), -30.0f, glm::vec4(0.2f, 0.8f, 0.2f, 1.0f));
+	m_scene->addActor(surface);
 
 	return true;
 }

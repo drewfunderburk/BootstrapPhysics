@@ -86,9 +86,6 @@ bool PhysicsScene::sphereToSphere(Sphere* sphere1, Sphere* sphere2)
 	// Test to ensure collisions are detected
 	if (distance < totalRadii)
 	{
-		/*sphere1->applyForce(-(sphere1->getVelocity() * sphere1->getMass()));
-		sphere2->applyForce(-(sphere2->getVelocity() * sphere2->getMass()));*/
-
 		sphere1->applyForce(-sphere1->getVelocity() * sphere1->getMass());
 		sphere2->applyForce(-sphere2->getVelocity() * sphere2->getMass());
 
