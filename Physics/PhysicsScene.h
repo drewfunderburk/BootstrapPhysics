@@ -35,6 +35,8 @@ public:
 	static bool boxToSphere		(PhysicsObject* object1, PhysicsObject* object2);
 	static bool boxToBox		(PhysicsObject* object1, PhysicsObject* object2);
 
+
+
 private:
 	glm::vec2 m_gravity;
 	float m_timeStep;

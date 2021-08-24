@@ -24,6 +24,17 @@ void PhysicsScene::removeActor(PhysicsObject* actor)
 	m_actors.erase(actor);
 }
 
+// Collision function pointer type
+typedef bool(*collisionCheck)(PhysicsObject*, PhysicsObject*);
+
+// Array of collision check functions
+static const collisionCheck collisionFunctionArray[] =
+{
+	PhysicsScene::planeToPlane,		PhysicsScene::planeToSphere,	PhysicsScene::planeToBox,
+	PhysicsScene::sphereToPlane,	PhysicsScene::sphereToSphere,	PhysicsScene::sphereToBox,
+	PhysicsScene::boxToPlane,		PhysicsScene::boxToSphere,		PhysicsScene::boxToBox
+};
+
 void PhysicsScene::update(float deltaTime)
 {
 	static float accumulatedTime = 0.0f;
@@ -51,10 +62,16 @@ void PhysicsScene::update(float deltaTime)
 				PhysicsObject* object1 = *outer;
 				PhysicsObject* object2 = *inner;
 
-				// Collision check
-				sphereToSphere(object1, object2);
-				sphereToPlane(object1, object2);
-				planeToSphere(object1, object2);
+				int shape1 = (int)(object1->getShapeID());
+				int shape2 = (int)(object2->getShapeID());
+
+				// Find index using i = (y * w) + x
+				int i = (shape1 * (int)ShapeType::LENGTH) + shape2;
+
+				// Retrieve and call proper collision check function
+				collisionCheck collisionFn = collisionFunctionArray[i];
+				if (collisionFn)
+					collisionFn(object1, object2);
 			}
 		}
 	}
@@ -78,7 +95,7 @@ bool PhysicsScene::planeToSphere(PhysicsObject* object1, PhysicsObject* object2)
 
 bool PhysicsScene::planeToBox(PhysicsObject* object1, PhysicsObject* object2)
 {
-	return false;
+	return boxToPlane(object2, object1);
 }
 
 bool PhysicsScene::sphereToPlane(PhysicsObject* object1, PhysicsObject* object2)
@@ -145,7 +162,7 @@ bool PhysicsScene::sphereToSphere(PhysicsObject* object1, PhysicsObject* object2
 		);
 
 	// Test to ensure collisions are detected
-	if (distance < totalRadii)
+	if (glm::abs(distance) < totalRadii)
 	{
 		sphere1->applyForce(-sphere1->getVelocity() * sphere1->getMass());
 		sphere2->applyForce(-sphere2->getVelocity() * sphere2->getMass());
@@ -158,7 +175,7 @@ bool PhysicsScene::sphereToSphere(PhysicsObject* object1, PhysicsObject* object2
 
 bool PhysicsScene::sphereToBox(PhysicsObject* object1, PhysicsObject* object2)
 {
-	return false;
+	return boxToSphere(object2, object1);
 }
 
 bool PhysicsScene::boxToPlane(PhysicsObject* object1, PhysicsObject* object2)
