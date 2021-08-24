@@ -18,14 +18,18 @@ bool PhysicsGame::startup()
 
 	m_scene = new PhysicsScene();
 
-	Sphere* sphere = new Sphere(glm::vec2(20, 0), glm::vec2(), 1, 0.5f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+	Sphere* sphere = new Sphere(glm::vec2(20, 10), glm::vec2(), 1, 10, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 	m_scene->addActor(sphere);
 
 	Sphere* sphere1 = new Sphere(glm::vec2(-20, 0), glm::vec2(), 1, 10, glm::vec4(0.0f, 1.0f, 1.0f, 1.0f));
 	m_scene->addActor(sphere1);
 
-	Plane* surface = new Plane(glm::vec2(0.1f, 1.0f), -30.0f, glm::vec4(0.2f, 0.8f, 0.2f, 1.0f));
+	Plane* surface = new Plane({ 0.1f, 1.0f }, -30.0f, { 0.2f, 0.8f, 0.2f, 1.0f });
 	m_scene->addActor(surface);
+
+	m_scene->setGravity({ 0, -10 });
+	m_scene->setTimeStep(0.01f);
+	sphere1->applyForce({ 10, 0 });
 
 	return true;
 }
