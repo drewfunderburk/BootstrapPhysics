@@ -22,8 +22,6 @@ void Plane::draw()
 	float lineSegmentLength = 300.0f;
 	glm::vec2 centerPoint = m_normal * m_distance;
 	glm::vec2 parallel(m_normal.y, -m_normal.x);
-	glm::vec4 colorfade = m_color;
-	colorfade.a = 0.0f;
 
 	glm::vec2 start = centerPoint + (parallel * lineSegmentLength);
 	glm::vec2 end = centerPoint - (parallel * lineSegmentLength);
