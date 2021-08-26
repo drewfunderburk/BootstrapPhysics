@@ -17,19 +17,39 @@ bool PhysicsGame::startup()
 	setBackgroundColour(0.1f, 0.1f, 0.1f);
 
 	m_scene = new PhysicsScene();
+	m_scene->setGravity({ 0, 0 });
 
-	Sphere* sphere = new Sphere(glm::vec2(20, 10), glm::vec2(), 1, 10, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
-	m_scene->addActor(sphere);
+	// Walls
+	Plane* leftWall = new Plane({ 1, 0 }, -95, { 0, 1, 0, 1 });
+	m_scene->addActor(leftWall);
+	
+	Plane* rightWall = new Plane({ -1, 0 }, -95, { 0, 1, 0, 1 });
+	m_scene->addActor(rightWall);
 
-	Sphere* sphere1 = new Sphere(glm::vec2(-20, 0), glm::vec2(), 1, 10, glm::vec4(0.0f, 1.0f, 1.0f, 1.0f));
-	m_scene->addActor(sphere1);
+	Plane* bottomWall = new Plane({ 0, 1 }, -50, { 0, 1, 0, 1 });
+	m_scene->addActor(bottomWall);
 
-	Plane* surface = new Plane({ 0.1f, 1.0f }, -30.0f, { 0.2f, 0.8f, 0.2f, 1.0f });
-	m_scene->addActor(surface);
+	Plane* topWall = new Plane({ 0, -1 }, -50, { 0, 1, 0, 1 });
+	m_scene->addActor(topWall);
 
-	m_scene->setGravity({ 0, -10 });
-	m_scene->setTimeStep(0.01f);
-	sphere1->applyForce({ 10, 0 });
+	// Cue ball
+	Sphere* cueBall = new Sphere({ -30, 0 }, { 30, 0 }, 1, 5, { 1, 1, 1, 1 });
+	m_scene->addActor(cueBall);
+
+	// Colored balls
+	Sphere* ball1 = new Sphere({ 0, 0 }, { 0, 0 }, 1, 5, { 1, 0, 0, 1 });
+	Sphere* ball2 = new Sphere({ 9, 6 }, { 0, 0 }, 1, 5, { 0, 1, 0, 1 });
+	Sphere* ball3 = new Sphere({ 9, -6 }, { 0, 0 }, 1, 5, { 0, 0, 1, 1 });
+	Sphere* ball4 = new Sphere({ 20, 0 }, { 0, 0 }, 1, 5, { 0.5f, 0, 0, 1 });
+	Sphere* ball5 = new Sphere({ 20, 12 }, { 0, 0 }, 1, 5, { 0, 0.5f, 0, 1 });
+	Sphere* ball6 = new Sphere({ 20, -12 }, { 0, 0 }, 1, 5, { 0, 0, 0.5f, 1 });
+
+	m_scene->addActor(ball1);
+	m_scene->addActor(ball2);
+	m_scene->addActor(ball3);
+	m_scene->addActor(ball4);
+	m_scene->addActor(ball5);
+	m_scene->addActor(ball6);
 
 	return true;
 }
