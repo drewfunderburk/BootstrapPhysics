@@ -33,7 +33,7 @@ This project uses [AIE's Boostrap](https://github.com/AcademyOfInteractiveEntert
 ##### Classes
 - [PhysicsGame](#class-PhysicsGame)
 - [PhysicsObject](#class-PhysicsObject)
-- [PhysicsScene](#class-class-PhysicsScene)
+- [PhysicsScene](#class-PhysicsScene)
 - [RigidBody](#class-RigidBody)
 - [Plane](#class-Plane)
 - [Sphere](#class-Sphere)
@@ -149,7 +149,7 @@ float m_mass         | This [RigidBody](#class-RigidBody)'s mass
 Function  | Use
 :---------|:----
 | **Public**
-Plane(glm\::vec2 normal, float distance, glm::vec4 color)          | Default constructor
+Plane(glm\::vec2 normal, float distance, glm::vec4 color)         | Default constructor
 ~Plane()                                                          | Default destructor
 virtual void fixedUpdate(glm::vec2 gravity, float timeStep)       | Physics update
 virtual void draw()                                               | Draw this [Plane](#class-Plane) to the screen
@@ -173,10 +173,10 @@ Function  | Use
 :---------|:----
 | **Public**
 Sphere(glm\::vec2 position, glm::vec2 velocity, float mass, float radius, glm::vec4 color) | Default constructor
-~Sphere()                                                                                 | Default destructor
-virtual void draw()                                                                       | Draw this sphere to the screen
-float getRadius()                                                                         | Getter for m_radius
-glm::vec4 getColor()                                                                      | Getter for m_color
+~Sphere()                                                                                  | Default destructor
+virtual void draw()                                                                        | Draw this sphere to the screen
+float getRadius()                                                                          | Getter for m_radius
+glm::vec4 getColor()                                                                       | Getter for m_color
 
 Variable | Use
 :---------|:----
