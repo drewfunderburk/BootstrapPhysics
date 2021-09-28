@@ -5,6 +5,9 @@
 
 Engine::Engine()
 {
+	m_screenSizeX = 1280;
+	m_screenSizeY = 720;
+	m_windowTitle = "Engine";
 }
 
 Engine::Engine(int screenSizeX, int screenSizeY, const char* windowTitle)
@@ -16,6 +19,7 @@ Engine::Engine(int screenSizeX, int screenSizeY, const char* windowTitle)
 
 Engine::~Engine()
 {
+
 }
 
 int Engine::run()
@@ -27,7 +31,9 @@ int Engine::run()
 
 	while (!glfwWindowShouldClose(m_window) && glfwGetKey(m_window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
-		exitCode = update(1);
+		exitCode = update(0);
+		if (exitCode) return exitCode;
+		exitCode = draw();
 		if (exitCode) return exitCode;
 	}
 
@@ -68,14 +74,22 @@ int Engine::start()
 
 int Engine::update(float deltaTime)
 {
-	glfwSwapBuffers(m_window);
+	if (!m_window) return -5;
 	glfwPollEvents();
+	return 0;
+}
+
+int Engine::draw()
+{
+	if (!m_window) return -5;
+	glfwSwapBuffers(m_window);
 	return 0;
 }
 
 int Engine::end()
 {
 	// Cleanup and exit
+	if (!m_window) return -6;
 	glfwDestroyWindow(m_window);
 	glfwTerminate();
 	return 0;

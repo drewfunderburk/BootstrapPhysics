@@ -1,5 +1,5 @@
 #pragma once
-//class GLFWwindow;
+class GLFWwindow;
 class Engine
 {
 public:
@@ -12,10 +12,11 @@ public:
 private:
 	int start();
 	int update(float deltaTime);
+	int draw();
 	int end();
 
 private:
-	GLFWwindow* m_window;
+	GLFWwindow* m_window = nullptr;
 	int m_screenSizeX;
 	int m_screenSizeY;
 	const char* m_windowTitle;
