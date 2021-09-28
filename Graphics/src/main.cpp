@@ -27,8 +27,13 @@ int main()
 		return -3;
 	}
 	printf("Loaded OpenGL functions\n");
-
 	printf("OpenGL version %i.%i\n", ogl_GetMajorVersion(), ogl_GetMinorVersion());
+
+	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE)!= GLFW_PRESS)
+	{
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
 
 	// Cleanup and exit
 	glfwDestroyWindow(window);
