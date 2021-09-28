@@ -3,24 +3,14 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-Engine::Engine()
-{
-	m_screenSizeX = 1280;
-	m_screenSizeY = 720;
-	m_windowTitle = "Engine";
-}
+Engine::Engine() : Engine(1280, 720, "Engine") { }
 
-Engine::Engine(int screenSizeX, int screenSizeY, const char* windowTitle)
-{
-	m_screenSizeX = screenSizeX;
-	m_screenSizeY = screenSizeY;
-	m_windowTitle = windowTitle;
-}
+Engine::Engine(int screenSizeX, int screenSizeY, const char* windowTitle) : 
+	m_screenSizeX(screenSizeX), 
+	m_screenSizeY(screenSizeY), 
+	m_windowTitle(windowTitle) { }
 
-Engine::~Engine()
-{
-
-}
+Engine::~Engine() { }
 
 int Engine::run()
 {
