@@ -3,15 +3,6 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-Engine::Engine() : Engine(1280, 720, "Engine") { }
-
-Engine::Engine(int screenSizeX, int screenSizeY, const char* windowTitle) : 
-	m_screenSizeX(screenSizeX), 
-	m_screenSizeY(screenSizeY), 
-	m_windowTitle(windowTitle) { }
-
-Engine::~Engine() { }
-
 int Engine::run()
 {
 	int exitCode = 0;

@@ -3,9 +3,9 @@ class GLFWwindow;
 class Engine
 {
 public:
-	Engine();
-	Engine(int screenSizeX, int screenSizeY, const char* windowTitle);
-	~Engine();
+	Engine(int screenSizeX = 0, int screenSizeY = 0, const char* windowTitle = "Window") : 
+		m_screenSizeX(screenSizeX), m_screenSizeY(screenSizeY), m_windowTitle(windowTitle) {}
+	~Engine() {}
 
 	int run();
 
