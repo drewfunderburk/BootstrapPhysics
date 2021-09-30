@@ -163,11 +163,17 @@
     <ClCompile Include="src\Mesh.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Quad.h" />
     <ClInclude Include="src\Mesh.h" />
     <ClInclude Include="src\Engine.h" />
+    <ClInclude Include="src\Shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Fragment.shader" />
+    <None Include="Shaders\Vertex.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

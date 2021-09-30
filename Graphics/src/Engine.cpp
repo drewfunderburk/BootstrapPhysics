@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include <gl_core_4_4.h>
 #include <GLFW/glfw3.h>
+#include <glm\ext.hpp>
 #include <iostream>
 
 int Engine::run()
@@ -50,6 +51,33 @@ int Engine::start()
 	printf("Loaded OpenGL functions\n");
 	printf("OpenGL version %i.%i\n", ogl_GetMajorVersion(), ogl_GetMinorVersion());
 
+	// Initialize shader
+	m_shader.loadShader(aie::eShaderStage::VERTEX, "Shaders/Vertex.shader");
+	m_shader.loadShader(aie::eShaderStage::FRAGMENT, "Shaders/Fragment.shader");
+	if (!m_shader.link())
+	{
+		printf("Shader error: %s\n", m_shader.getLastError());
+		return -7;
+	}
+
+	// Initialize mesh
+	m_mesh.start();
+
+	// Create camera transforms
+	m_viewMatrix = glm::lookAt
+	(
+		glm::vec3(10, 10, 10),
+		glm::vec3(0),
+		glm::vec3(0, 1, 0)
+	);
+	m_projectionMatrix = glm::perspective
+	(
+		glm::pi<float>() / 4.0f,
+		(float)m_screenSizeX / (float)m_screenSizeY,
+		0.001f,
+		1000.0f
+	);
+
 	return 0;
 }
 
@@ -63,6 +91,16 @@ int Engine::update(float deltaTime)
 int Engine::draw()
 {
 	if (!m_window) return -5;
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	m_shader.bind();
+
+	glm::mat4 projectViewModel = m_projectionMatrix * m_viewMatrix * m_mesh.getTransform();
+	m_shader.bindUniform("projectionViewModel", projectViewModel);
+
+	m_mesh.draw();
+
 	glfwSwapBuffers(m_window);
 	return 0;
 }

@@ -1,4 +1,7 @@
 #pragma once
+#include "Shader.h"
+#include "Mesh.h"
+
 class GLFWwindow;
 class Engine
 {
@@ -20,5 +23,11 @@ private:
 	int m_screenSizeX;
 	int m_screenSizeY;
 	const char* m_windowTitle;
+
+	aie::ShaderProgram m_shader;
+	Mesh m_mesh;
+
+	glm::mat4 m_viewMatrix;
+	glm::mat4 m_projectionMatrix;
 };
 
