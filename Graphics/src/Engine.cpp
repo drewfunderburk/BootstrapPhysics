@@ -74,6 +74,7 @@ int Engine::update(float deltaTime)
 {
 	if (!m_window) return -5;
 	glfwPollEvents();
+	m_world->update();
 	return 0;
 }
 
@@ -96,6 +97,7 @@ int Engine::draw()
 
 int Engine::end()
 {
+	m_world->end();
 	// Cleanup and exit
 	if (!m_window) return -6;
 	glfwDestroyWindow(m_window);
