@@ -4,6 +4,11 @@
 #include <glm\ext.hpp>
 #include <iostream>
 
+Engine::~Engine()
+{
+	delete m_world;
+}
+
 int Engine::run()
 {
 	int exitCode = 0;
@@ -60,23 +65,7 @@ int Engine::start()
 		return -7;
 	}
 
-	// Initialize mesh
-	m_mesh.start();
-
-	// Create camera transforms
-	m_viewMatrix = glm::lookAt
-	(
-		glm::vec3(10, 10, 10),
-		glm::vec3(0),
-		glm::vec3(0, 1, 0)
-	);
-	m_projectionMatrix = glm::perspective
-	(
-		glm::pi<float>() / 4.0f,
-		(float)m_screenSizeX / (float)m_screenSizeY,
-		0.001f,
-		1000.0f
-	);
+	m_world->start();
 
 	return 0;
 }
@@ -96,10 +85,10 @@ int Engine::draw()
 
 	m_shader.bind();
 
-	glm::mat4 projectViewModel = m_projectionMatrix * m_viewMatrix * m_mesh.getTransform();
+	glm::mat4 projectViewModel = m_world->getProjectionViewModel();
 	m_shader.bindUniform("projectionViewModel", projectViewModel);
 
-	m_mesh.draw();
+	m_world->draw();
 
 	glfwSwapBuffers(m_window);
 	return 0;
