@@ -37,17 +37,9 @@ void Mesh::start()
     glBindVertexArray(m_vertexArrayObject);
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
 
-    // Define vertices for a quad
-    int vertexCount = 6;
-    Vertex vertices[6];
+    unsigned int vertexCount;
     m_triCount = 2;
-    vertices[0].position = { -0.5f,  0.0f,  0.5f, 1.0f };
-    vertices[1].position = { 0.5f,  0.0f,  0.5f, 1.0f };
-    vertices[2].position = { -0.5f,  0.0f, -0.5f, 1.0f };
-
-    vertices[3].position = { 0.5f,  0.0f,  0.5f, 1.0f };
-    vertices[4].position = { -0.5f,  0.0f, -0.5f, 1.0f };
-    vertices[5].position = { 0.5f,  0.0f, -0.5f, 1.0f };
+    Vertex* vertices = generateVertices(vertexCount, m_triCount);
 
     // Fill vertex buffer
     glBufferData
@@ -70,6 +62,19 @@ void Mesh::start()
         0                   // Position in memory of this attribute
     );
 
+    // Enable vertex color as second attribute
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer
+    (
+        1,                              // Attribute index
+        4,                              // Number of values within attribute
+        GL_FLOAT,                       // Type of each value
+        GL_FALSE,                       // Whether or not to normalize
+        sizeof(Vertex),                 // Size of one Vertex
+        (void*)(sizeof(glm::vec4) * 1)  // Position in memory of this attribute
+    );
+
+    // Unbind buffer and array
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -78,10 +83,5 @@ void Mesh::start()
 void Mesh::draw()
 {
     glBindVertexArray(m_vertexArrayObject);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-}
-
-void Mesh::generateVertices(Vertex* vertices, int& vertexCount)
-{
-
+    glDrawArrays(GL_TRIANGLES, 0, m_triCount * 3);
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include "glm\mat4x4.hpp"
-#include "Mesh.h"
+#include "Quad.h"
 
 class World
 {
@@ -21,7 +21,7 @@ public:
 
 private:
 	int m_width, m_height;
-	Mesh m_mesh;
+	Quad m_quad;
 
 	glm::mat4 m_viewMatrix;
 	glm::mat4 m_projectionMatrix;

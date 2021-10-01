@@ -4,7 +4,7 @@
 void World::start()
 {
 	// Initialize mesh
-	m_mesh.start();
+	m_quad.start();
 
 	// Create camera transforms
 	m_viewMatrix = glm::lookAt
@@ -28,7 +28,7 @@ void World::update()
 
 void World::draw()
 {
-	m_mesh.draw();
+	m_quad.draw();
 }
 
 void World::end()
@@ -37,5 +37,5 @@ void World::end()
 
 glm::mat4 World::getProjectionViewModel()
 {
-	return m_projectionMatrix * m_viewMatrix * m_mesh.getTransform();
+	return m_projectionMatrix * m_viewMatrix * m_quad.getTransform();
 }
