@@ -76,6 +76,8 @@ int Engine::start()
 		return -7;
 	}
 
+	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+
 	m_world->start();
 
 	return 0;
