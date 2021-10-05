@@ -2,6 +2,7 @@
 #include "glm\mat4x4.hpp"
 #include "Quad.h"
 #include "Camera.h"
+#include "Light.h"
 
 class World
 {
@@ -25,5 +26,6 @@ private:
 
 	Camera m_camera = Camera();
 	glm::mat4 m_projectionMatrix;
+	Light m_light = Light();
 };
 

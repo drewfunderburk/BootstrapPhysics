@@ -3,6 +3,7 @@
 
 Mesh::Mesh() :
     m_triCount(0),
+    m_color(glm::vec4(1)),
     m_vertexArrayObject(0), 
     m_vertexBufferObject(0), 
     m_indexBufferObject(0),
