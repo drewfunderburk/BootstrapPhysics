@@ -6,14 +6,12 @@ class GLFWwindow;
 class Engine
 {
 public:
-	Engine(int screenSizeX = 0, int screenSizeY = 0, const char* windowTitle = "Window") :
-		m_screenSizeX(screenSizeX),
-		m_screenSizeY(screenSizeY),
-		m_windowTitle(windowTitle),
-		m_world(new World(screenSizeX, screenSizeY)) {}
+	Engine(int screenSizeX = 0, int screenSizeY = 0, const char* windowTitle = "Window");
 	~Engine();
 
 	int run();
+
+	static aie::ShaderProgram* getShader() { return m_shader; }
 
 private:
 	int start();
@@ -27,7 +25,7 @@ private:
 	int m_screenSizeY;
 	const char* m_windowTitle;
 
-	aie::ShaderProgram m_shader;
+	static aie::ShaderProgram* m_shader;
 	World* m_world;
 };
 

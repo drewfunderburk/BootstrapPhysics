@@ -17,7 +17,7 @@ public:
 	void draw();
 	void end();
 
-	glm::mat4 getProjectionViewModel();
+	glm::mat4 getProjectionViewMatrix();
 
 private:
 	int m_width, m_height;

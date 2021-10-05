@@ -19,10 +19,13 @@ Mesh::Vertex* Quad::generateVertices(unsigned int& vertexCount, unsigned int& tr
     for (int i = 0; i < vertexCount; i++)
     {
         vertices[i].color = { 0.0f, 0.5f, 0.5f, 1.0f };
+        vertices[i].normal = { 0.0f, 1.0f, 0.0f, 0.0f };
     }
 
     vertices[0].color = { 1.0f, 0.0f, 0.0f, 1.0f };
     vertices[5].color = { 0.8f, 0.8f, 0.0f, 1.0f };
+
+    vertices[5].normal = { 1.0f, 0.0f, 0.0f, 0.0f };
 
     return vertices;
 }

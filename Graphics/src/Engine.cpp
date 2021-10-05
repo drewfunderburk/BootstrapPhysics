@@ -4,6 +4,17 @@
 #include <glm\ext.hpp>
 #include <iostream>
 
+aie::ShaderProgram* Engine::m_shader = nullptr;
+
+Engine::Engine(int screenSizeX, int screenSizeY, const char* windowTitle) :
+	m_screenSizeX(screenSizeX),
+	m_screenSizeY(screenSizeY),
+	m_windowTitle(windowTitle),
+	m_world(new World(screenSizeX, screenSizeY))
+{
+	m_shader = new aie::ShaderProgram();
+}
+
 Engine::~Engine()
 {
 	delete m_world;
@@ -57,11 +68,11 @@ int Engine::start()
 	printf("OpenGL version %i.%i\n", ogl_GetMajorVersion(), ogl_GetMinorVersion());
 
 	// Initialize shader
-	m_shader.loadShader(aie::eShaderStage::VERTEX, "Shaders/Vertex.shader");
-	m_shader.loadShader(aie::eShaderStage::FRAGMENT, "Shaders/Fragment.shader");
-	if (!m_shader.link())
+	m_shader->loadShader(aie::eShaderStage::VERTEX, "Shaders/Vertex.shader");
+	m_shader->loadShader(aie::eShaderStage::FRAGMENT, "Shaders/Fragment.shader");
+	if (!m_shader->link())
 	{
-		printf("Shader error: %s\n", m_shader.getLastError());
+		printf("Shader error: %s\n", m_shader->getLastError());
 		return -7;
 	}
 
@@ -84,10 +95,9 @@ int Engine::draw()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	m_shader.bind();
+	m_shader->bind();
 
-	glm::mat4 projectViewModel = m_world->getProjectionViewModel();
-	m_shader.bindUniform("projectionViewModel", projectViewModel);
+	m_shader->bindUniform("projectionViewMatrix", m_world->getProjectionViewMatrix());
 
 	m_world->draw();
 
