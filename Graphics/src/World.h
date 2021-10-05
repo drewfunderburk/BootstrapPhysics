@@ -1,6 +1,7 @@
 #pragma once
 #include "glm\mat4x4.hpp"
 #include "Quad.h"
+#include "Camera.h"
 
 class World
 {
@@ -8,7 +9,6 @@ public:
 	World(int width = 1280, int height = 720) :
 		m_width(width),
 		m_height(height),
-		m_viewMatrix(glm::mat4(1.0f)),
 		m_projectionMatrix(glm::mat4(1.0f)) {}
 	~World() {}
 
@@ -23,7 +23,7 @@ private:
 	int m_width, m_height;
 	Quad m_quad;
 
-	glm::mat4 m_viewMatrix;
+	Camera m_camera = Camera();
 	glm::mat4 m_projectionMatrix;
 };
 
