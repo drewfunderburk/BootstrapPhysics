@@ -5,7 +5,7 @@
 
 void World::start()
 {
-	m_objMesh.load("Lucy.obj", false);
+	m_objMesh.load("obj/stanford/Lucy.obj");
 
 	// Initialize mesh
 	m_quad.start();
