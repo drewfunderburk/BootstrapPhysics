@@ -1,5 +1,5 @@
 #include "Mesh.h"
-#include "Engine.h"
+#include "..\Engine.h"
 
 Mesh::Mesh() :
     m_triCount(0),
