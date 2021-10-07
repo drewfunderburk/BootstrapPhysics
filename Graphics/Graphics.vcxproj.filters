@@ -81,5 +81,15 @@
   <ItemGroup>
     <None Include="Shaders\Fragment.shader" />
     <None Include="Shaders\Vertex.shader" />
+    <None Include="obj\stanford\Buddha.mtl" />
+    <None Include="obj\stanford\Bunny.mtl" />
+    <None Include="obj\stanford\Dragon.mtl" />
+    <None Include="obj\stanford\Lucy.mtl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="obj\stanford\Buddha.obj" />
+    <Object Include="obj\stanford\Bunny.obj" />
+    <Object Include="obj\stanford\Dragon.obj" />
+    <Object Include="obj\stanford\Lucy.obj" />
   </ItemGroup>
 </Project>
