@@ -1,6 +1,7 @@
 #pragma once
 #include "glm\mat4x4.hpp"
 #include "Mesh\Quad.h"
+#include "Mesh\OBJMesh.h"
 #include "Camera.h"
 #include "Light.h"
 
@@ -32,6 +33,9 @@ private:
 	Camera m_camera = Camera();
 	glm::mat4 m_projectionMatrix;
 	Light m_light = Light();
+
+	aie::OBJMesh m_objMesh;
+	glm::mat4 m_objTransform = glm::mat4(1.0f);
 
 	GLFWwindow* m_window = nullptr;
 	double m_currentMouseX = 0.0;
