@@ -1,6 +1,6 @@
 #pragma once
 #include "glm\mat4x4.hpp"
-#include "Quad.h"
+#include "Mesh\Quad.h"
 #include "Camera.h"
 #include "Light.h"
 

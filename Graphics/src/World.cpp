@@ -16,13 +16,17 @@ void World::start()
 	m_light.setSpecular(glm::vec4(1.0f));
 	m_light.setSpecularPower(1000.0f);
 
+	Transform cameraTransform = m_camera.getTransform();
+	cameraTransform.translate(glm::vec3(1.0f));
+	cameraTransform.rotate(glm::vec3(-45.0f, 45.0f, 0.0f));
+	m_camera.setTransform(cameraTransform); 
 	// Create camera transforms
-	m_camera.setTransform(glm::lookAt
-	(
-		glm::vec3(1, 1, 1),
-		glm::vec3(0),
-		glm::vec3(0, 1, 0)
-	));
+	//m_camera.setTransform(glm::lookAt
+	//(
+	//	glm::vec3(1, 1, 1),
+	//	glm::vec3(0),
+	//	glm::vec3(0, 1, 0)
+	//));
 	m_projectionMatrix = glm::perspective
 	(
 		m_camera.getFieldOfView() * glm::pi<float>() / 180.0f,
@@ -62,52 +66,51 @@ void World::update(double deltaTime)
 
 	if (deltaMouseX != 0 && deltaMouseY != 0)
 	{
-		glm::mat4 cameraTransform = m_camera.getTransform();
-		cameraTransform = glm::rotate(cameraTransform, (float)(deltaMouseX * cameraSensitivity * deltaTime), cameraUp);
-		cameraTransform = glm::rotate(cameraTransform, (float)(deltaMouseY * cameraSensitivity * deltaTime), cameraRight);
+		Transform cameraTransform = m_camera.getTransform();
+		cameraTransform.rotate(glm::vec3(deltaMouseY, deltaMouseX, 0.0f) * (float)(cameraSensitivity * deltaTime));
 		m_camera.setTransform(cameraTransform);
 	}
 
 	if (glfwGetKey(m_window, keyForward))
 	{
 		// Move forward
-		glm::mat4 cameraTransform = m_camera.getTransform();
-		cameraTransform = glm::translate(cameraTransform, cameraForward * cameraSpeed * (float)deltaTime);
+		Transform cameraTransform = m_camera.getTransform();
+		cameraTransform.translate(cameraForward * cameraSpeed * (float)deltaTime);
 		m_camera.setTransform(cameraTransform);
 	}
 	if (glfwGetKey(m_window, keyBack))
 	{
 		// Move forward
-		glm::mat4 cameraTransform = m_camera.getTransform();
-		cameraTransform = glm::translate(cameraTransform, -cameraForward * cameraSpeed * (float)deltaTime);
+		Transform cameraTransform = m_camera.getTransform();
+		cameraTransform.translate(-cameraForward * cameraSpeed * (float)deltaTime);
 		m_camera.setTransform(cameraTransform);
 	}
 	if (glfwGetKey(m_window, keyRight))
 	{
 		// Move forward
-		glm::mat4 cameraTransform = m_camera.getTransform();
-		cameraTransform = glm::translate(cameraTransform, cameraRight * cameraSpeed * (float)deltaTime);
+		Transform cameraTransform = m_camera.getTransform();
+		cameraTransform.translate(-cameraRight * cameraSpeed * (float)deltaTime);
 		m_camera.setTransform(cameraTransform);
 	}
 	if (glfwGetKey(m_window, keyLeft))
 	{
 		// Move forward
-		glm::mat4 cameraTransform = m_camera.getTransform();
-		cameraTransform = glm::translate(cameraTransform, -cameraRight * cameraSpeed * (float)deltaTime);
+		Transform cameraTransform = m_camera.getTransform();
+		cameraTransform.translate(cameraRight * cameraSpeed * (float)deltaTime);
 		m_camera.setTransform(cameraTransform);
 	}
 	if (glfwGetKey(m_window, keyUp))
 	{
 		// Move forward
-		glm::mat4 cameraTransform = m_camera.getTransform();
-		cameraTransform = glm::translate(cameraTransform, -cameraUp * cameraSpeed * (float)deltaTime);
+		Transform cameraTransform = m_camera.getTransform();
+		cameraTransform.translate(-cameraUp * cameraSpeed * (float)deltaTime);
 		m_camera.setTransform(cameraTransform);
 	}
 	if (glfwGetKey(m_window, keyDown))
 	{
 		// Move forward
-		glm::mat4 cameraTransform = m_camera.getTransform();
-		cameraTransform = glm::translate(cameraTransform, cameraUp * cameraSpeed * (float)deltaTime);
+		Transform cameraTransform = m_camera.getTransform();
+		cameraTransform.translate(cameraUp * cameraSpeed * (float)deltaTime);
 		m_camera.setTransform(cameraTransform);
 	}
 }
@@ -129,5 +132,5 @@ void World::end()
 
 glm::mat4 World::getProjectionViewMatrix()
 {
-	return m_projectionMatrix * m_camera.getTransform();
+	return m_projectionMatrix * m_camera.getTransform().getMatrix();
 }
