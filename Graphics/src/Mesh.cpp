@@ -94,6 +94,10 @@ void Mesh::start()
 
 }
 
+void Mesh::update(double deltaTime)
+{
+}
+
 void Mesh::draw()
 {
     Engine::getShader()->bindUniform("modelMatrix", m_transform);

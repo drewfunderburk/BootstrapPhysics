@@ -19,6 +19,7 @@ public:
 
 	void initializeQuad();
 	void start();
+	virtual void update(double deltaTime);
 	virtual void draw();
 
 	virtual Vertex* generateVertices(unsigned int& vertexCount, unsigned int& triCount) = 0;

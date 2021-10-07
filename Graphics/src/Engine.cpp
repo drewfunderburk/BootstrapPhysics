@@ -24,15 +24,27 @@ int Engine::run()
 {
 	int exitCode = 0;
 
+	double currentTime = 0.0f;
+	double previousTime = 0.0f;
+	double deltaTime = 0.0f;
+
 	exitCode = start();
 	if (exitCode) return exitCode;
 
 	while (!glfwWindowShouldClose(m_window) && glfwGetKey(m_window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
-		exitCode = update(0);
+		// Get current time
+		currentTime = glfwGetTime();
+		// Find deltaTime
+		deltaTime = currentTime - previousTime;
+		// Update previous time
+		previousTime = currentTime;
+
+		exitCode = update(deltaTime);
 		if (exitCode) return exitCode;
 		exitCode = draw();
 		if (exitCode) return exitCode;
+
 	}
 
 	exitCode = end();
@@ -55,6 +67,7 @@ int Engine::start()
 		return -2;
 	}
 	glfwMakeContextCurrent(m_window);
+	m_world->setWindow(m_window);
 	printf("Created window\n");
 
 	// Load OpenGL
@@ -83,11 +96,11 @@ int Engine::start()
 	return 0;
 }
 
-int Engine::update(float deltaTime)
+int Engine::update(double deltaTime)
 {
 	if (!m_window) return -5;
 	glfwPollEvents();
-	m_world->update();
+	m_world->update(deltaTime);
 	return 0;
 }
 

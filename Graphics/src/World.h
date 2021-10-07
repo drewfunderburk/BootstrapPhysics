@@ -4,6 +4,8 @@
 #include "Camera.h"
 #include "Light.h"
 
+class GLFWwindow;
+
 class World
 {
 public:
@@ -14,11 +16,14 @@ public:
 	~World() {}
 
 	void start();
-	void update();
+	void update(double deltaTime);
 	void draw();
 	void end();
 
 	glm::mat4 getProjectionViewMatrix();
+
+	GLFWwindow* getWindow() { return m_window; }
+	void setWindow(GLFWwindow* window) { m_window = window; }
 
 private:
 	int m_width, m_height;
@@ -27,5 +32,11 @@ private:
 	Camera m_camera = Camera();
 	glm::mat4 m_projectionMatrix;
 	Light m_light = Light();
+
+	GLFWwindow* m_window = nullptr;
+	double m_currentMouseX = 0.0;
+	double m_currentMouseY = 0.0;
+	double m_previousMouseX = 0.0;
+	double m_previousMouseY = 0.0;
 };
 
