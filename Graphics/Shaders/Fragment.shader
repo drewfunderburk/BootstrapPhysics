@@ -1,10 +1,13 @@
 #version 410
 
 in vec4 fColor;
-out vec4 color;
+in vec2 fTexCoord;
+
+uniform sampler2D diffuseTexture;
+
+out vec4 pColor;
 
 void main()
 {
-	//color = vec4(0.0f, 1.0f, 0.0f, 1.0f);
-	color = fColor;
+	pColor = fColor * texture(diffuseTexture, fTexCoord);
 }
