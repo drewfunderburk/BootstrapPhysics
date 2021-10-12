@@ -2,6 +2,7 @@
 #include "glm\mat4x4.hpp"
 #include "Quad.h"
 #include "Camera.h"
+#include "Texture.h"
 
 class World
 {
@@ -22,6 +23,8 @@ public:
 private:
 	int m_width, m_height;
 	Quad m_quad;
+
+	aie::Texture m_earthDiffuse;
 
 	Camera m_camera = Camera();
 	glm::mat4 m_projectionMatrix;

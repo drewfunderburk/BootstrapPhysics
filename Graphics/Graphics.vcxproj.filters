@@ -61,4 +61,24 @@
     <None Include="Shaders\Fragment.shader" />
     <None Include="Shaders\Vertex.shader" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="src\Resources\earth_cloud.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="src\Resources\earth_cloud_trans.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="src\Resources\earth_diffuse.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="src\Resources\earth_lights.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="src\Resources\earth_normal.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="src\Resources\earth_specular.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

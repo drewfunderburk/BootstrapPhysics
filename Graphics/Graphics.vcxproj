@@ -179,6 +179,14 @@
     <None Include="Shaders\Fragment.shader" />
     <None Include="Shaders\Vertex.shader" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="src\Resources\earth_cloud.jpg" />
+    <Image Include="src\Resources\earth_cloud_trans.jpg" />
+    <Image Include="src\Resources\earth_diffuse.jpg" />
+    <Image Include="src\Resources\earth_lights.jpg" />
+    <Image Include="src\Resources\earth_normal.jpg" />
+    <Image Include="src\Resources\earth_specular.jpg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
